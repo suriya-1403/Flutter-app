@@ -26,6 +26,47 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String _output = "0";
+  String operand;
+  double num1, num2;
+  ButtonPress(String x) {
+    if (x == "Clear") {
+      _output = "0";
+      operand="";
+      num1 = num2 = 0.0;
+    } else if (x == "+" || x == "-" || x == "*" || x == "/") {
+      num1 = double.parse(output);
+      operand = x;
+      _output = "0";
+    } else if (x == ".") {
+      if (_output.contains(".")) {
+        print("Already . Contains");
+        return;
+      } else {
+        _output = _output + x;
+      }
+    } else if (x == "=") {
+      num2 = double.parse(output);
+      if (operand == "+") {
+        _output = (num1 + num2).toString();
+      } else if (operand == "-") {
+        _output = (num1 - num2).toString();
+      } else if (operand == "*") {
+        _output = (num1 * num2).toString();
+      } else if (operand == "/") {
+        _output = (num1 / num2).toString();
+      }
+      num1 = 0.0;
+      num2 = 0.0;
+      operand = "";
+    } else {
+      _output = _output + x;
+    }
+    setState(() {
+      output = double.parse(_output).toStringAsFixed(4);
+    });
+  }
+
   String output = "0";
 
   Widget buildButton(String x) {
@@ -38,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        onPressed: () => {},
+        onPressed: () => ButtonPress(x),
         padding: new EdgeInsets.all(24.00),
       ),
     );
@@ -109,5 +150,5 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           )
         ])));
-  } 
+  }
 }
