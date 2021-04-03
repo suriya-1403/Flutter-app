@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
+        primarySwatch: Colors.green,
       ),
       home: MyHomePage(title: 'Calculator'),
     );
@@ -26,20 +26,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String output = "0";
 
-  Widget buildButton(String x){
+  Widget buildButton(String x) {
     return new Expanded(
-                  child: new OutlineButton(
-                  child: new Text(x,
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  ),
-                  onPressed: () => {},
-                  padding: new EdgeInsets.all(24.00),
-                ),
-              ); 
+      child: new OutlineButton(
+        child: new Text(
+          x,
+          style: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        onPressed: () => {},
+        padding: new EdgeInsets.all(24.00),
+      ),
+    );
   }
 
   @override
@@ -50,51 +52,62 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: new Container(
             child: new Column(children: <Widget>[
-            new Expanded(child: new Divider(),
+          new Container(
+            alignment: Alignment.centerRight,
+            padding: new EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
+            child: Text(
+              output,
+              style: new TextStyle(
+                fontSize: 48.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            
-            new Column(
-              children: [
-                Row(
-                  children: [
-                    buildButton("9"),
-                    buildButton("8"),
-                    buildButton("7"),
-                    buildButton("/"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    buildButton("6"),
-                    buildButton("5"),
-                    buildButton("4"),
-                    buildButton("*"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    buildButton("3"),
-                    buildButton("2"),
-                    buildButton("1"),
-                    buildButton("-"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    buildButton("."),
-                    buildButton("0"),
-                    buildButton("00"),
-                    buildButton("+"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    buildButton("Clear"),
-                    buildButton("="),
-                  ],
-                ),
-              ],
-            )
+          ),
+          new Expanded(
+            child: new Divider(),
+          ),
+          new Column(
+            children: [
+              Row(
+                children: [
+                  buildButton("9"),
+                  buildButton("8"),
+                  buildButton("7"),
+                  buildButton("/"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton("6"),
+                  buildButton("5"),
+                  buildButton("4"),
+                  buildButton("*"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton("3"),
+                  buildButton("2"),
+                  buildButton("1"),
+                  buildButton("-"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton("."),
+                  buildButton("0"),
+                  buildButton("00"),
+                  buildButton("+"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton("Clear"),
+                  buildButton("="),
+                ],
+              ),
+            ],
+          )
         ])));
-  }
+  } 
 }
