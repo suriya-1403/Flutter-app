@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login_auth/Screens/Login/LoginScreen.dart';
+import 'package:login_auth/Screens/SignUp/SignUpScreen.dart';
 import 'package:login_auth/Screens/Welcome/components/background.dart';
 import 'package:login_auth/components/roundedButton.dart';
 import 'package:login_auth/constants.dart';
@@ -45,7 +46,16 @@ class Body extends StatelessWidget {
               text: "Sign UP",
               color: kPrimaryLightColor,
               textColor: Colors.black,
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SignUpScreen();
+                    }
+                  )
+                );
+              },
             )
           ],
         ),
