@@ -1,17 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login_auth/Screens/Home/HomeScreen.dart';
 import 'package:login_auth/Screens/Login/components/background.dart';
 import 'package:login_auth/Screens/SignUp/SignUpScreen.dart';
-import 'package:login_auth/Screens/Welcome/components/body.dart';
 import 'package:login_auth/components/AlreadyHaveDoestHave.dart';
 import 'package:login_auth/components/RoundedInputField.dart';
 import 'package:login_auth/components/RoundedPassInputField.dart';
-import 'package:login_auth/components/TextFieldContainer.dart';
 import 'package:login_auth/components/roundedButton.dart';
-import 'package:login_auth/constants.dart';
 
 class Body extends StatelessWidget {
   String email = '', password = '';
@@ -50,14 +46,25 @@ class Body extends StatelessWidget {
             },
           ),
           RoundedButton(
-            text: "Login",
-            press: () {
-              auth.signInWithEmailAndPassword(email: email, password: password);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return HomeScreen();
-              }));
-            },
-          ),
+              text: "Login",
+              press: () async {
+                // auth.signInWithEmailAndPassword(email: email, password: password);
+
+                try {
+                  UserCredential userCredential = await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: email, password: password);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return HomeScreen();
+                  }));
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'user-not-found') {
+                    print('No user found for that email.');
+                  } else if (e.code == 'wrong-password') {
+                    print('Wrong password provided for that user.');
+                  }
+                }
+              }),
           SizedBox(
             height: size.height * 0.03,
           ),
