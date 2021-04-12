@@ -40,6 +40,13 @@ class Body extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
+              ),
+              Container(
+                child: 
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(260.0,270,0.0,0.0),
+                  child: Image.network('https://i.pinimg.com/originals/75/47/d7/7547d70ae8714e715dd4e3b118898438.jpg'),
+                ),
               )
             ],
           ),
